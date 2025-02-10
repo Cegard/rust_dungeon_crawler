@@ -3,10 +3,10 @@ mod components;
 mod map;
 mod map_builder;
 mod spawners;
+mod systems;
 
 mod prelude {
     pub use bracket_lib::prelude::*;
-    pub use legion::systems::CommandBuffer;
     pub use legion::world::SubWorld;
     pub use legion::*;
     pub const SCREEN_WIDTH: i32 = 80;
@@ -18,6 +18,7 @@ mod prelude {
     pub use crate::map::*;
     pub use crate::map_builder::*;
     pub use crate::spawners::*;
+    pub use crate::systems::*;
 }
 use prelude::*;
 
@@ -40,7 +41,7 @@ impl State {
         Self {
             ecs,
             resources,
-            systems: Schedule::from(""), // TODO: add own builder
+            systems: build_scheduler(),
         }
     }
 }
@@ -51,6 +52,8 @@ impl GameState for State {
         ctx.cls();
         ctx.set_active_console(1);
         ctx.cls();
+        self.resources.insert(ctx.key);
+        self.systems.execute(&mut self.ecs, &mut self.resources);
     }
 }
 
