@@ -30,7 +30,7 @@ struct State {
     resources: Resources,
     input_systems: Schedule,
     player_systems: Schedule,
-    mosnter_sytems: Schedule,
+    monster_systems: Schedule,
 }
 
 impl State {
@@ -55,7 +55,7 @@ impl State {
             resources,
             input_systems: build_input_scheduler(),
             player_systems: build_player_scheduler(),
-            mosnter_sytems: build_monster_scheduler(),
+            monster_systems: build_monster_scheduler(),
         }
     }
 }
@@ -81,7 +81,7 @@ impl GameState for State {
                     .execute(&mut self.ecs, &mut self.resources);
             }
             TurnState::MonsterTurn => {
-                self.mosnter_sytems
+                self.monster_systems
                     .execute(&mut self.ecs, &mut self.resources);
             }
         }
