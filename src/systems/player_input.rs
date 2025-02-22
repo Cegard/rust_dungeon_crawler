@@ -9,7 +9,8 @@ pub fn player_input(
     #[resource] key: &Option<VirtualKeyCode>,
     #[resource] turn_state: &mut TurnState,
 ) {
-    let mut players = <(Entity, &Point)>::query().filter(component::<Player>());
+    let mut players = <(Entity, &Point)>::query()
+        .filter(component::<Player>());
     if let Some(key) = key {
         let delta = match key {
             VirtualKeyCode::Left => Point::new(-1, 0),
@@ -24,7 +25,8 @@ pub fn player_input(
             .map(|(entity, pos)| (*entity, *pos + delta))
             .next()
             .unwrap();
-        let mut enemies = <(Entity, &Point)>::query().filter(component::<Enemy>());
+        let mut enemies = <(Entity, &Point)>::query()
+            .filter(component::<Enemy>());
         if delta.x != 0 || delta.y != 0 {
             let mut hit_something = false;
             enemies
