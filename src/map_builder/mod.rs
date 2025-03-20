@@ -1,4 +1,5 @@
 use crate::prelude::*;
+mod automata;
 mod empty;
 mod rooms;
 use rooms::RoomsArchitect;
