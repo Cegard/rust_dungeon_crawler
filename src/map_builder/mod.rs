@@ -3,6 +3,7 @@ mod automata;
 mod empty;
 mod rooms;
 use rooms::RoomsArchitect;
+mod drunkard;
 
 const NUM_ROOMS: usize = 20;
 
