@@ -2,6 +2,7 @@ use crate::prelude::*;
 mod automata;
 mod empty;
 mod rooms;
+use drunkard::DrunkardsWalkArchitect;
 use rooms::RoomsArchitect;
 mod drunkard;
 
@@ -21,7 +22,7 @@ trait MapArchitect {
 
 impl MapBuilder {
     pub fn new(rng: &mut RandomNumberGenerator) -> Self {
-        let mut architect = RoomsArchitect {};
+        let mut architect = DrunkardsWalkArchitect {};
         architect.new(rng)
     }
 
@@ -96,7 +97,7 @@ impl MapBuilder {
         }
     }
 
-    fn fin_most_distant(&self) -> Point {
+    fn find_most_distant(&self) -> Point {
         let dijkstra_map = DijkstraMap::new(
             SCREEN_WIDTH,
             SCREEN_HEIGHT,
