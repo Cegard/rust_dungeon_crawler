@@ -6,6 +6,7 @@ use automata::CellularAutomataArchitect;
 use drunkard::DrunkardsWalkArchitect;
 use rooms::RoomsArchitect;
 mod drunkard;
+mod prefab;
 
 const NUM_ROOMS: usize = 20;
 
