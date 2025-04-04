@@ -8,6 +8,7 @@ use prefab::apply_prefab;
 use rooms::RoomsArchitect;
 mod drunkard;
 mod prefab;
+mod themes;
 
 const NUM_ROOMS: usize = 20;
 
@@ -17,6 +18,10 @@ pub struct MapBuilder {
     pub player_start: Point,
     pub amulet_start: Point,
     pub monster_spawns: Vec<Point>,
+}
+
+pub trait MapTheme: Sync + Send {
+    fn tile_to_render(&self, tile_type: TileType) -> FontCharType;
 }
 
 trait MapArchitect {
