@@ -9,6 +9,7 @@ use rooms::RoomsArchitect;
 mod drunkard;
 mod prefab;
 mod themes;
+use themes::*;
 
 const NUM_ROOMS: usize = 20;
 
@@ -18,6 +19,7 @@ pub struct MapBuilder {
     pub player_start: Point,
     pub amulet_start: Point,
     pub monster_spawns: Vec<Point>,
+    pub theme: Box<dyn MapTheme>,
 }
 
 pub trait MapTheme: Sync + Send {
@@ -38,6 +40,11 @@ impl MapBuilder {
 
         let mut mb = architect.new(rng);
         apply_prefab(&mut mb, rng);
+
+        mb.theme = match rng.range(0, 2) {
+            0 => DungeonTheme::new(),
+            _ => ForestTheme::new(),
+        };
 
         mb
     }
